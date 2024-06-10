@@ -13,27 +13,21 @@ class Grid(arcade.Window):
         self.grid = np.zeros((self.rows,self.columns))        
         self.column_x, self.row_y = self.get_column_and_row_size(self.rows, self.columns) 
         self.grid_coords = self.get_grid_coords(self.rows, self.columns)
+        self.current_coordinate = "No current coordinate"
         super().__init__(X, Y, title)
 
         arcade.set_background_color((0,0,0))
 
-    def setup(self):
-        """ Set up the game variables. Call to re-start the game. """
-        # Create your sprites and sprite lists here
-        pass
-
     def on_draw(self):
         
         self.clear()
-        """
-        Render the screen.
-        """
         for r_ind, row in enumerate(self.grid_coords):
             for c_ind, column in enumerate(row):
                 try:
                     if self.grid[r_ind][c_ind] == 1:
                         arcade.draw_lrtb_rectangle_filled(column[0],column[1],column[2],column[3], arcade.color.BLUE)
                     arcade.draw_lrtb_rectangle_outline(column[0],column[1],column[2],column[3], arcade.csscolor.RED)
+                    arcade.draw_text(self.current_coordinate, self.x // (1/3 * self.x), self.y - (self.row_y//2), arcade.color.WHITE, 12)
                 except:
                     pass
     
@@ -41,6 +35,7 @@ class Grid(arcade.Window):
         
         col = int(x) // self.column_x
         row = int(y) // self.row_y
+        self.current_coordinate = f"Current Coordinate: {col}, {row}"
         print('coord: ', (col, row))
         
         if int(y) < self.y and int(x) < self.x:
@@ -80,7 +75,6 @@ class Grid(arcade.Window):
 
 def main(X, Y, rows, columns, TITLE = 'Simple Grid'):
     game = Grid(X, Y, rows, columns, TITLE)
-    game.setup()
     arcade.run()
 
 if __name__ == '__main__':
