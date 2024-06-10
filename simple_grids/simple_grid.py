@@ -36,7 +36,6 @@ class Grid(arcade.Window):
         col = int(x) // self.column_x
         row = int(y) // self.row_y
         self.current_coordinate = f"Current Coordinate: {col}, {row}"
-        print('coord: ', (col, row))
         
         if int(y) < self.y and int(x) < self.x:
             if self.grid[row][col] == 0:
@@ -85,6 +84,7 @@ if __name__ == '__main__':
         rows = int(input('ROWS :: '))
         columns = int(input('COLUMNS :: '))
         try:
+            assert Y < 1080 and X < 1920
             assert rows < Y and columns < X
             assert Y/rows > 3 and X/columns>3
             start = True
