@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+.virtual_documents/
+assets/
+*.bat
+__pycache__/
